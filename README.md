@@ -1,3 +1,9 @@
+<!-- 
+REACT_APP_API_URL=http://localhost:3000
+REACT_APP_SOCKET_URL=http://localhost:3000
+PORT=3001 
+-->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# calamity-front-end
