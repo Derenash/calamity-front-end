@@ -43,27 +43,11 @@ const AuctionRoom = () => {
 
     const fetchedCaptains = await fetchCaptains(auctionId);
 
+    console.log('Fetched Captains');
     console.log(JSON.stringify(fetchedCaptains));
 
     // Filter captains
     const captains = fetchedPlayers.filter(player => player.isCaptainUsername !== null);
-
-    // {
-    //   "id": 8,
-    //   "auctionId": 1,
-    //   "name": "Deor",
-    //   "isCaptainUsername": "deor",
-    //   "ownerUsername": null,
-    //   "battleTag": "Deor#21487",
-    //   "nationality": "BR",
-    //   "primaryRole": "DPS",
-    //   "secondaryRole": "HEALER",
-    //   "price": 0,
-    //   "createdAt": "2024-08-04T22:36:40.931Z",
-    //   "updatedAt": "2024-08-04T22:36:40.931Z",
-    //   "coins": 0,
-    //   "players": []
-    // }
 
     // Create initial teams array
     const teamsArray = captains.map(captain => {
@@ -112,13 +96,23 @@ const AuctionRoom = () => {
     }
   };
 
+  const username = localStorage.getItem('username');
+  const sortedTeams = teams.sort((teamA, teamB) => {
+    if (teamA.captain.isCaptainUsername === username) {
+      return -1;
+    } else if (teamB.captain.isCaptainUsername === username) {
+      return 1;
+    } else {
+      return teamB.players.length - teamA.players.length;
+    }
+  });
+
   return (
     <div className="auction-room">
       <h1 className="auction-title">Calamity Divisão A</h1>
-      <p>Auction Status: {auctionStatus}</p>
       <div className="auction-content">
         <AvailablePlayersList players={availablePlayers} onBuy={handleBuy} />
-        <TeamList teams={teams} />
+        <TeamList teams={teams} onBuy={handleBuy} />
       </div>
     </div>
   );

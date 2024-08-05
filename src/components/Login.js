@@ -18,6 +18,7 @@ const Login = () => {
     try {
       const token = await login(username, password);
       localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
       setGlobalAuctionId(auctionId);
       navigate('/auction');
     } catch (error) {

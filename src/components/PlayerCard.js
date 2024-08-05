@@ -1,10 +1,16 @@
 import React from 'react';
 import { getFlagImage, getRoleImage } from '../utils/playerCardUtils';
+import { useAuction } from '../context/AuctionContext';
 
 const PlayerCard = ({ player, onBuy, isCaptain }) => {
-  const playerInfoClass = isCaptain ? 'player-info captain' : 'player-info';
+  const { favorites, toggleFavorite } = useAuction();
+  const isFavorite = favorites.includes(player.id);
+
+  const availablePlayerCardClass = `available-player-card ${isFavorite ? 'favorite' : ''}`;
+  const playerInfoClass = `player-info ${isCaptain ? 'captain' : ''}`;
+
   return (
-    <div className="available-player-card" >
+    <div className={availablePlayerCardClass}>
       <div className={playerInfoClass}>
         <div className="player-name-battletag">
           <span className="player-name">{player.name}</span>
@@ -30,6 +36,17 @@ const PlayerCard = ({ player, onBuy, isCaptain }) => {
               BUY
             </button>
           </>
+        )}
+        {!isCaptain && (
+          <span
+            className="favorite-star"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorite(player.id);
+            }}
+          >
+            {isFavorite ? '★' : '☆'}
+          </span>
         )}
       </div>
     </div>
