@@ -29,6 +29,18 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/*.js",
+          "**/*.jsx"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
     ]
   },
   "browserslist": {
