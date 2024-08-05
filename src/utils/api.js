@@ -23,8 +23,13 @@ export const fetchPlayers = async (auctionId) => {
   return response.data;
 };
 
-export const buyPlayer = async (playerId) => {
-  const response = await api.post(`/players/${playerId}/buy`);
+export const fetchCaptains = async (auctionId) => {
+  const response = await api.get(`/players/${auctionId}/captains`);
+  return response.data;
+};
+
+export const buyPlayer = async (auctionId, playerId) => {
+  const response = await api.post(`/players/${auctionId}/buy/${playerId}`);
   return response.data;
 };
 

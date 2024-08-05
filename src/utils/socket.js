@@ -12,12 +12,8 @@ export const disconnectSocket = () => {
   socket.disconnect();
 };
 
-export const onPlayerUpdate = (callback) => {
-  socket.on('playerUpdate', callback);
-};
-
-export const onAuctionStatusUpdate = (callback) => {
-  socket.on('auctionStatusUpdate', callback);
+export const onUpdate = (callback) => {
+  socket.on('update', callback);
 };
 
 export default socket;

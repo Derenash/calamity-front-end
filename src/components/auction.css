@@ -1,0 +1,221 @@
+/* auction.css */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: radial-gradient(circle, #4b0082, #2e0854);
+  color: white;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.auction-room {
+  padding: 20px;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.auction-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auction-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.available-players-list,
+.team-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.available-players-list {
+  width: 500px;
+  /* Slightly reduced width */
+}
+
+.available-player-card,
+.team-player-card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.available-player-card {
+  padding: 8px;
+  /* Reduced padding */
+  margin-bottom: 8px;
+  /* Reduced margin */
+  font-size: 14px;
+  /* Slightly smaller font size */
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  flex-direction: row;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* Reduced gap */
+  margin-left: 20px;
+  /* Reduced margin */
+  width: 100%;
+  height: 100%;
+}
+
+.team-card {
+  width: 300px;
+  /* Reduced width */
+  padding: 10px;
+  /* Reduced padding */
+}
+
+.team-name {
+  margin-bottom: 10px;
+  color: #ffd700;
+}
+
+.team-player-card {
+  padding: 5px;
+  /* Reduced padding */
+  margin-bottom: 5px;
+  /* Reduced margin */
+  font-size: 12px;
+  /* Smaller font size */
+}
+
+.team-player-card.captain {
+  border: 2px solid #ffd700;
+}
+
+.player-name {
+  font-size: 14px;
+  /* Reduced font size */
+  font-weight: bold;
+  margin-bottom: 3px;
+  /* Reduced margin */
+}
+
+.player-name-battletag {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  /* Reduced width */
+  overflow: hidden;
+}
+
+.player-name-battletag>* {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-info {
+  height: 40px;
+  /* Reduced height */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 10px;
+  /* Smaller font size */
+}
+
+.player-info.captain {
+  color: #ffd700;
+  justify-content: center;
+}
+
+.player-battletag {
+  color: #61dafb;
+}
+
+.player-price-buy {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.player-price {
+  font-size: 16px;
+  /* Reduced font size */
+  color: #4caf50;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  padding: 3px;
+  /* Reduced padding */
+  border-radius: 5px;
+}
+
+.buy-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  /* Reduced padding */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  /* Reduced font size */
+  font-weight: 500;
+}
+
+.buy-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.player-icon {
+  height: 30px;
+  /* Reduced size */
+  vertical-align: middle;
+}
+
+.role-filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.role-filter {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.role-filter img {
+  width: 40px;
+  height: 40px;
+}
+
+.role-filter.active {
+  outline: 3px solid #61dafb;
+  border-radius: 50%;
+}
+
+.role-filter:hover {
+  transform: scale(1.1);
+}
+
+.logo-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
