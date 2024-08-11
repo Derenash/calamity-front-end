@@ -13,6 +13,9 @@ const AuctionRoom = () => {
   const [teams, setTeams] = useState([]);
   const [auctionStatus, setAuctionStatus] = useState('');
   const { auctionId } = useAuction();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isConfirming, setIsConfirming] = useState(false);
 
   useEffect(() => {
     const initAuction = async () => {
@@ -75,35 +78,52 @@ const AuctionRoom = () => {
     setTeams(teamsArray);
   };
 
-
   const updateTeams = async () => { }
 
-
   const handlePlayerUpdate = () => {
-    console.log("A player has been bought")
+    console.log("A player has been bought");
     updateAuction();
+    // Close the modal if it's open
+    setShowModal(false);
+    setIsConfirming(false);
+    setSelectedPlayer(null);
   };
 
   const handleBuy = async (player) => {
+    setSelectedPlayer(player);
+    setShowModal(true);
+  };
+
+  const confirmPurchase = async () => {
+    setIsConfirming(true);
     try {
       const buyer = localStorage.getItem('username');
       const team = teams.find(team => team.id === buyer);
       if (!team) {
         console.error('Team not found for buyer:', buyer);
+        return;
       }
-      const captain = team.captain;
-      if (player.ownerUsername === buyer) {
+      if (selectedPlayer.ownerUsername === buyer) {
         console.log('You already own this player.');
+        return;
       }
-      if (team.coins < player.price) {
+      if (team.coins < selectedPlayer.price) {
         console.log('You do not have enough coins to buy this player.');
+        return;
       }
-      await buyPlayer(auctionId, player.id, player.price, player.ownerUsername);
-      // The actual update will be handled by the socket event
+      await buyPlayer(auctionId, selectedPlayer.id, selectedPlayer.price, selectedPlayer.ownerUsername);
+      // The actual update and modal closing will be handled by the socket event (handlePlayerUpdate)
     } catch (error) {
       console.error('Purchase failed:', error);
+      setIsConfirming(false);
       // You might want to show an error message to the user here
     }
+  };
+
+  const cancelPurchase = () => {
+    setShowModal(false);
+    setSelectedPlayer(null);
+    setIsConfirming(false);
   };
 
   const username = localStorage.getItem('username');
@@ -123,6 +143,28 @@ const AuctionRoom = () => {
         <AvailablePlayersList players={availablePlayers} onBuy={handleBuy} />
         <TeamList teams={teams} onBuy={handleBuy} />
       </div>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2 className="modal-title">Confirm Purchase</h2>
+            <p className="modal-message">
+              Are you sure you want to buy {selectedPlayer.name} for {selectedPlayer.price} coins?
+            </p>
+            <div className="modal-buttons">
+              <button
+                className={`modal-button confirm-button ${isConfirming ? 'confirming' : ''}`}
+                onClick={confirmPurchase}
+                disabled={isConfirming}
+              >
+                {isConfirming ? 'Confirming...' : 'Confirm'}
+              </button>
+              <button className="modal-button cancel-button" onClick={cancelPurchase}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
