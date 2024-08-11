@@ -30,7 +30,7 @@ const AuctionRoom = () => {
     return () => {
       disconnectSocket();
     };
-  });
+  }, []);
 
   const updateAuction = async () => {
     // Fetch all players
