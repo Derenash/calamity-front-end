@@ -100,8 +100,6 @@ const AuctionRoom = () => {
       return -1;
     } else if (teamB.captain.isCaptainUsername === username) {
       return 1;
-    } else {
-      return teamB.players.length - teamA.players.length;
     }
   });
 
