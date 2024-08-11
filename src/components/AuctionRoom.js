@@ -86,6 +86,18 @@ const AuctionRoom = () => {
 
   const handleBuy = async (player) => {
     try {
+      const buyer = localStorage.getItem('username');
+      const team = teams.find(team => team.id === buyer);
+      if (!team) {
+        console.error('Team not found for buyer:', buyer);
+      }
+      const captain = team.captain;
+      if (player.ownerUsername === buyer) {
+        console.log('You already own this player.');
+      }
+      if (team.coins < player.price) {
+        console.log('You do not have enough coins to buy this player.');
+      }
       await buyPlayer(auctionId, player.id, player.price, player.ownerUsername);
       // The actual update will be handled by the socket event
     } catch (error) {
