@@ -29,7 +29,6 @@ export const fetchCaptains = async (auctionId) => {
 };
 
 export const buyPlayer = async (auctionId, playerId, playerPrice, ownerUsername) => {
-  console.log("buyPlayer called with:", auctionId, playerId, playerPrice, ownerUsername);
   const response = await api.post(`/players/${auctionId}/buy/${playerId}`, {
     price: playerPrice,
     ownerUsername: ownerUsername

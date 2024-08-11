@@ -1,7 +1,6 @@
 // src/utils/flagUtils.js
 
 export const getFlagImage = (countryCode) => {
-  console.log(countryCode);
   const flagUrl = `/flags/${countryCode.toLowerCase()}_flag.png`;
   return (
     <img
