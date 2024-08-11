@@ -27,7 +27,7 @@ const TransactionHistory = () => {
   return (
     <div className="transaction-history">
       <h2>Recent Transactions</h2>
-      <div class="transaction-history-content">
+      <div className="transaction-history-content">
         <div className="transaction-header">
           <span>Buyer</span>
           <span>Player</span>

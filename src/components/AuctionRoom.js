@@ -5,14 +5,11 @@ import { connectSocket, disconnectSocket, onUpdate, } from '../utils/socket';
 import AvailablePlayersList from './AvailablePlayersList';
 import TeamList from './TeamList';
 import TransactionHistory from './TransactionHistory';
-import { useAuction } from '../context/AuctionContext';
 import './auction.css';
 
 const AuctionRoom = () => {
   const [availablePlayers, setAvailablePlayers] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [auctionStatus, setAuctionStatus] = useState('');
-  const { auctionId } = useAuction();
   const [showModal, setShowModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isConfirming, setIsConfirming] = useState(false);
@@ -33,11 +30,11 @@ const AuctionRoom = () => {
     return () => {
       disconnectSocket();
     };
-  }, [auctionId]);
+  });
 
   const updateAuction = async () => {
     // Fetch all players
-    const fetchedPlayers = await fetchPlayers(auctionId);
+    const fetchedPlayers = await fetchPlayers();
 
     // Filter available players (no owner and not a captain)
     const availablePlayers = fetchedPlayers.filter(player =>
@@ -45,7 +42,7 @@ const AuctionRoom = () => {
     );
     setAvailablePlayers(availablePlayers);
 
-    const fetchedCaptains = await fetchCaptains(auctionId);
+    const fetchedCaptains = await fetchCaptains();
 
     // Filter captains
     const captains = fetchedPlayers.filter(player => player.isCaptainUsername !== null);
@@ -111,7 +108,7 @@ const AuctionRoom = () => {
         console.log('You do not have enough coins to buy this player.');
         return;
       }
-      await buyPlayer(auctionId, selectedPlayer.id, selectedPlayer.price, selectedPlayer.ownerUsername);
+      await buyPlayer(selectedPlayer.id, selectedPlayer.price, selectedPlayer.ownerUsername);
       // The actual update and modal closing will be handled by the socket event (handlePlayerUpdate)
     } catch (error) {
       console.error('Purchase failed:', error);

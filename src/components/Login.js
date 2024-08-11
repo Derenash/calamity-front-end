@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../utils/api';
-import { useAuction } from '../context/AuctionContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [auctionId, setAuctionId] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setAuctionId: setGlobalAuctionId } = useAuction();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +16,15 @@ const Login = () => {
       const token = await login(username, password);
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
-      setGlobalAuctionId(auctionId);
       navigate('/auction');
     } catch (error) {
       console.error('Login failed:', error);
     }
+  };
+
+  const handleObserverEntry = () => {
+    // Enter as an observer without authentication
+    navigate('/auction');
   };
 
   const togglePasswordVisibility = () => {
@@ -52,15 +53,8 @@ const Login = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-        <input
-          type="text"
-          value={auctionId}
-          onChange={(e) => setAuctionId(e.target.value)}
-          placeholder="Auction ID"
-          className="login-input"
-        />
         <button type="submit" className="login-button">Join</button>
-        <button type="button" className="observer-button">Observer</button>
+        <button type="button" className="observer-button" onClick={handleObserverEntry}>Observer</button>
       </form>
       <div className="logo-container">
         <img src={`${process.env.PUBLIC_URL}/calamity_logo_1.png`} alt="Calamity Logo" className="logo" />
@@ -70,4 +64,3 @@ const Login = () => {
 };
 
 export default Login;
-

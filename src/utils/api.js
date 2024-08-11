@@ -18,23 +18,23 @@ export const login = async (username, password) => {
   return response.data.token;
 };
 
-export const fetchPlayers = async (auctionId) => {
-  const response = await api.get(`/players/${auctionId}`);
+export const fetchPlayers = async () => {
+  const response = await api.get(`/players/1`);
   return response.data;
 };
 
-export const fetchCaptains = async (auctionId) => {
-  const response = await api.get(`/players/${auctionId}/captains`);
+export const fetchCaptains = async () => {
+  const response = await api.get(`/players/1/captains`);
   return response.data;
 };
 
-export const fetchTransaction = async (auctionId) => {
-  const response = await api.get(`/players/${auctionId}/transactions`);
+export const fetchTransaction = async () => {
+  const response = await api.get(`/players/1/transactions`);
   return response.data;
 }
 
-export const buyPlayer = async (auctionId, playerId, playerPrice, ownerUsername) => {
-  const response = await api.post(`/players/${auctionId}/buy/${playerId}`, {
+export const buyPlayer = async (playerId, playerPrice, ownerUsername) => {
+  const response = await api.post(`/players/1/buy/${playerId}`, {
     price: playerPrice,
     ownerUsername: ownerUsername
   });

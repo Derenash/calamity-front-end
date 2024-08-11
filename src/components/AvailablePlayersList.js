@@ -41,7 +41,7 @@ const AvailablePlayersList = ({ players, onBuy }) => {
   });
 
   return (
-    <div class="relative">
+    <div className="relative">
       <div className="available-players-list">
         <h2>Available Players</h2>
         <div className="role-filters">
