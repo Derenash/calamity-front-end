@@ -6,6 +6,13 @@ const TeamCard = ({ team, onBuy }) => {
   const username = localStorage.getItem('username');
   const isUserTeam = team.id === username;
   const teamClass = isUserTeam ? 'user-team' : '';
+
+  // Sort players: locked players first, then unlocked players
+  const sortedPlayers = [...team.players].sort((a, b) => {
+    if (a.isLocked === b.isLocked) return 0;
+    return a.isLocked ? -1 : 1;
+  });
+
   return (
     <div className={`team-card ${teamClass}`}>
       <div className="team-header">
@@ -16,7 +23,7 @@ const TeamCard = ({ team, onBuy }) => {
         <PlayerCard player={team.captain} isCaptain={true} />
       </div>
       <div className="team-players">
-        {team.players.map((player) => (
+        {sortedPlayers.map((player) => (
           <PlayerCard key={player.id} player={player} isCaptain={false} onBuy={onBuy} />
         ))}
       </div>
