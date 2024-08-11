@@ -15,6 +15,7 @@ const Login = () => {
     try {
       const token = await login(username, password);
       localStorage.setItem('token', token);
+      localStorage.setItem('observer', 'false');
       localStorage.setItem('username', username);
       navigate('/auction');
     } catch (error) {
@@ -23,7 +24,7 @@ const Login = () => {
   };
 
   const handleObserverEntry = () => {
-    // Enter as an observer without authentication
+    localStorage.setItem('observer', 'true');
     navigate('/auction');
   };
 
