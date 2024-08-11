@@ -33,7 +33,7 @@ const PlayerCard = ({ player, onBuy, isCaptain }) => {
           <>
             <span className="player-price">${player.price}</span>
             {player.isLocked !== true && (
-              <button className="buy-button" onClick={() => onBuy(player.id)}>
+              <button className="buy-button" onClick={() => onBuy(player)}>
                 BUY
               </button>
             )}

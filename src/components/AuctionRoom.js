@@ -86,9 +86,9 @@ const AuctionRoom = () => {
     updateAuction();
   };
 
-  const handleBuy = async (playerId) => {
+  const handleBuy = async (player) => {
     try {
-      await buyPlayer(auctionId, playerId);
+      await buyPlayer(auctionId, player.id, player.price, player.ownerUsername);
       // The actual update will be handled by the socket event
     } catch (error) {
       console.error('Purchase failed:', error);
