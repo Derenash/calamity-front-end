@@ -4,6 +4,7 @@ import { fetchPlayers, buyPlayer, fetchCaptains } from '../utils/api';
 import { connectSocket, disconnectSocket, onUpdate, } from '../utils/socket';
 import AvailablePlayersList from './AvailablePlayersList';
 import TeamList from './TeamList';
+import TransactionHistory from './TransactionHistory';
 import { useAuction } from '../context/AuctionContext';
 import './auction.css';
 
@@ -42,9 +43,6 @@ const AuctionRoom = () => {
     setAvailablePlayers(availablePlayers);
 
     const fetchedCaptains = await fetchCaptains(auctionId);
-
-    console.log('Fetched Captains');
-    console.log(JSON.stringify(fetchedCaptains));
 
     // Filter captains
     const captains = fetchedPlayers.filter(player => player.isCaptainUsername !== null);
@@ -109,6 +107,7 @@ const AuctionRoom = () => {
 
   return (
     <div className="auction-room">
+      <TransactionHistory />
       <h1 className="auction-title">Calamity Divisão A</h1>
       <div className="auction-content">
         <AvailablePlayersList players={availablePlayers} onBuy={handleBuy} />

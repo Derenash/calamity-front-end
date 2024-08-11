@@ -376,6 +376,20 @@ body {
   .logo {
     width: 100px;
   }
+
+  .transaction-history {
+    padding: 10px;
+  }
+
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-item>div {
+    text-align: left;
+    margin-bottom: 5px;
+  }
 }
 
 .favorite-filter {
@@ -403,4 +417,131 @@ body {
 
 .favorite-filter:hover .favorite-star {
   transform: scale(1.2);
+}
+
+.relative {
+  position: relative;
+}
+
+.transaction-history {
+  background: rgb(84, 65, 146);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  position: absolute;
+  top: 45px;
+  left: 100px;
+  width: 250px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.transaction-history h2 {
+  color: #ffd700;
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.transaction-history-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.transaction-history:hover .transaction-history-content {
+  max-height: 300px;
+  /* Adjust this value to control expansion */
+  overflow-y: auto;
+}
+
+.transaction-history:hover {
+  width: 300px;
+  /* Slightly wider on hover */
+}
+
+.transaction-header,
+.transaction-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.transaction-header {
+  background: rgba(255, 255, 255, 0.25);
+  font-weight: bold;
+  margin: 15px;
+  margin-bottom: 5px;
+}
+
+.transaction-history ul {
+  list-style-type: none;
+  padding: 0 15px 15px;
+  margin: 0;
+}
+
+.transaction-item {
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 3px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.transaction-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.transaction-header span,
+.transaction-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-item span:nth-child(1) {
+  color: #61dafb;
+}
+
+/* Buyer */
+.transaction-item span:nth-child(2) {
+  color: #4caf50;
+}
+
+/* Player */
+.transaction-item span:nth-child(3) {
+  color: #ffd700;
+}
+
+/* Price */
+.transaction-item span:nth-child(4) {
+  color: #ff9800;
+}
+
+/* Seller */
+
+@media (max-width: 767px) {
+
+  .transaction-header,
+  .transaction-item {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .transaction-header {
+    display: none;
+  }
+
+  .transaction-item {
+    padding: 15px 10px;
+    gap: 5px;
+  }
+
+  .transaction-item span {
+    margin-bottom: 5px;
+  }
 }

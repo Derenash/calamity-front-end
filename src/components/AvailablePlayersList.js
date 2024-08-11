@@ -41,30 +41,32 @@ const AvailablePlayersList = ({ players, onBuy }) => {
   });
 
   return (
-    <div className="available-players-list">
-      <h2>Available Players</h2>
-      <div className="role-filters">
-        {roles.map(role => (
+    <div class="relative">
+      <div className="available-players-list">
+        <h2>Available Players</h2>
+        <div className="role-filters">
+          {roles.map(role => (
+            <button
+              key={role}
+              onClick={() => toggleRole(role)}
+              className={`role-filter ${selectedRoles.includes(role) ? 'active' : ''}`}
+            >
+              {getRoleImage(role)}
+              <span className="role-name">{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</span>
+            </button>
+          ))}
           <button
-            key={role}
-            onClick={() => toggleRole(role)}
-            className={`role-filter ${selectedRoles.includes(role) ? 'active' : ''}`}
+            onClick={toggleFavorites}
+            className={`role-filter favorite-filter ${showOnlyFavorites ? 'active' : ''}`}
           >
-            {getRoleImage(role)}
-            <span className="role-name">{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</span>
+            <span className="favorite-star">★</span>
+            <span className="role-name">Star</span>
           </button>
+        </div>
+        {sortedPlayers.map((player) => (
+          <PlayerCard key={player.id} player={player} onBuy={onBuy} isCaptain={false} />
         ))}
-        <button
-          onClick={toggleFavorites}
-          className={`role-filter favorite-filter ${showOnlyFavorites ? 'active' : ''}`}
-        >
-          <span className="favorite-star">★</span>
-          <span className="role-name">Star</span>
-        </button>
       </div>
-      {sortedPlayers.map((player) => (
-        <PlayerCard key={player.id} player={player} onBuy={onBuy} isCaptain={false} />
-      ))}
     </div>
   );
 };
