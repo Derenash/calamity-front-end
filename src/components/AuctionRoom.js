@@ -135,7 +135,7 @@ const AuctionRoom = () => {
   return (
     <div className="auction-room">
       <TransactionHistory />
-      <h1 className="auction-title">Calamity Divisão A</h1>
+      <h1 className="auction-title">Calamity Divisão B</h1>
       <div className="auction-content">
         <AvailablePlayersList players={availablePlayers} onBuy={handleBuy} />
         <TeamList teams={teams} onBuy={handleBuy} />

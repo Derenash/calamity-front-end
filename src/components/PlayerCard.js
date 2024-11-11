@@ -1,6 +1,14 @@
 import React from 'react';
-import { getFlagImage, getRoleImage } from '../utils/playerCardUtils';
+import { getEloImage, getFlagImage, getRoleImage, getSpokenLanguages } from '../utils/playerCardUtils';
 import { useAuction } from '../context/AuctionContext';
+
+function canPick(nationalityA, nationalityB) {
+  if (nationalityA === "BR" | nationalityB === "BR") {
+    return nationalityA === nationalityB
+  }
+  return true
+}
+
 
 const PlayerCard = ({ player, onBuy, isCaptain }) => {
   const { favorites, toggleFavorite } = useAuction();
@@ -28,6 +36,15 @@ const PlayerCard = ({ player, onBuy, isCaptain }) => {
               {getRoleImage(player.secondaryRole)}
             </span>
           )}
+          <span className="player-elo">
+            {getEloImage(player.rank)}
+          </span>
+          <div className="spoken-languages-container">
+            Languages
+            <div className="spoken-languages">
+              {getSpokenLanguages(player.languages)}
+            </div>
+          </div>
         </div>
         {!isCaptain && (
           <>

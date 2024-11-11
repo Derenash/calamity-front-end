@@ -38,7 +38,7 @@ body {
 }
 
 .available-players-list {
-  width: 450px;
+  width: 600px;
   padding: 20px;
   background: rgba(54, 38, 107, 1);
   border-radius: 10px;
@@ -180,7 +180,7 @@ body {
   margin-left: 20px;
   height: 100%;
   width: 100%;
-  max-width: calc(90vw - 490px);
+  max-width: calc(90vw - 640px);
   /* Adjust this value based on your layout needs */
 }
 
@@ -260,6 +260,12 @@ body {
   border-radius: 5px;
 }
 
+.player-details {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+}
+
 .buy-button {
   background: rgba(255, 255, 255, 0.2);
   color: white;
@@ -284,6 +290,31 @@ body {
   vertical-align: middle;
 }
 
+.player-icon.lang {
+  height: 22px;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+.spoken-languages-container {
+  width: 120px;
+  height: 100%;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.spoken-languages {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo-container {
   position: absolute;
   bottom: 20px;
@@ -298,6 +329,13 @@ body {
 /* Favorite player styling */
 .available-player-card.favorite,
 .team-player-card.favorite {
+  background: linear-gradient(135deg, rgba(174, 152, 25, 0.552), rgba(192, 171, 52, 0.662));
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.available-player-card.unavailable,
+.team-player-card.unavailable {
   background: linear-gradient(135deg, rgba(174, 152, 25, 0.552), rgba(192, 171, 52, 0.662));
   border: 1px solid rgba(255, 215, 0, 0.5);
   box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);

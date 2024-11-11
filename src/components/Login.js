@@ -13,10 +13,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = await login(username, password);
+      const data = await login(username, password);
+      const token = data.token;
+      const user = data.user
       localStorage.setItem('token', token);
       localStorage.setItem('observer', 'false');
       localStorage.setItem('username', username);
+      localStorage.setItem('isChill', user.isChill | 'false');
+      localStorage.setItem('nationality', user.nationality | '');
       navigate('/auction');
     } catch (error) {
       console.error('Login failed:', error);
