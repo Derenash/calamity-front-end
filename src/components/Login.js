@@ -19,8 +19,8 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('observer', 'false');
       localStorage.setItem('username', username);
-      localStorage.setItem('isChill', user.isChill | 'false');
-      localStorage.setItem('nationality', user.nationality | '');
+      localStorage.setItem('isChill', user.isChill);
+      localStorage.setItem('nationality', user.nationality);
       navigate('/auction');
     } catch (error) {
       console.error('Login failed:', error);
@@ -29,6 +29,10 @@ const Login = () => {
 
   const handleObserverEntry = () => {
     localStorage.setItem('observer', 'true');
+    localStorage.removeItem('username')
+    localStorage.removeItem('token');
+    localStorage.removeItem('isChill');
+    localStorage.removeItem('nationality');
     navigate('/auction');
   };
 

@@ -13,8 +13,11 @@ function canPick(nationalityA, nationalityB) {
 const PlayerCard = ({ player, onBuy, isCaptain }) => {
   const { favorites, toggleFavorite } = useAuction();
   const isFavorite = favorites.includes(player.id);
+  const isChill = localStorage.getItem('isChill') === 'true';
+  const bothChill = isChill && player.isChill
+  const pickable = isCaptain || player.isLocked || bothChill || canPick(player.nationality, localStorage.getItem('nationality'));
 
-  const availablePlayerCardClass = `available-player-card ${isFavorite ? 'favorite' : ''}`;
+  const availablePlayerCardClass = `available-player-card ${isFavorite ? 'favorite' : ''} ${pickable ? '' : 'unavailable'}`;
   const playerInfoClass = `player-info ${isCaptain ? 'captain' : ''}`;
 
   return (
