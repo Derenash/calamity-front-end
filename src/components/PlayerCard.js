@@ -1,13 +1,6 @@
 import React from 'react';
-import { getEloImage, getFlagImage, getRoleImage, getSpokenLanguages } from '../utils/playerCardUtils';
+import { canPick, getEloImage, getFlagImage, getRoleImage, getSpokenLanguages } from '../utils/playerCardUtils';
 import { useAuction } from '../context/AuctionContext';
-
-function canPick(nationalityA, nationalityB) {
-  if (nationalityA === "BR" | nationalityB === "BR") {
-    return nationalityA === nationalityB
-  }
-  return true
-}
 
 
 const PlayerCard = ({ player, onBuy, isCaptain }) => {

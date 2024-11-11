@@ -1,13 +1,14 @@
 // src/components/AvailablePlayersList.js
 import React, { useState } from 'react';
 import PlayerCard from './PlayerCard';
-import { getRoleImage } from '../utils/playerCardUtils';
+import { canPick, getRoleImage } from '../utils/playerCardUtils';
 import { useAuction } from '../context/AuctionContext';
 
 const AvailablePlayersList = ({ players, onBuy }) => {
   const roles = ['TANK', 'DPS', 'HEALER', 'FLEX', 'SOLO'];
   const [selectedRoles, setSelectedRoles] = useState(roles);
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+  const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
   const { favorites } = useAuction();
 
   const toggleRole = (role) => {
@@ -20,12 +21,19 @@ const AvailablePlayersList = ({ players, onBuy }) => {
     setShowOnlyFavorites(!showOnlyFavorites);
   };
 
+  const toggleAvailability = () => {
+    setShowOnlyAvailable(!showOnlyAvailable);
+  }
+
   const filteredPlayers = players.filter(player => {
     const roleMatch = selectedRoles.length === 0 ||
       selectedRoles.includes(player.primaryRole) ||
       selectedRoles.includes(player.secondaryRole);
     const favoriteMatch = !showOnlyFavorites || favorites.includes(player.id);
-    return roleMatch && favoriteMatch;
+    const isChill = localStorage.getItem('isChill') === 'true';
+    const bothChill = isChill && player.isChill
+    const isAvailable = !showOnlyAvailable | bothChill | canPick(player.nationality, localStorage.getItem('nationality'))
+    return roleMatch && favoriteMatch && isAvailable;
   });
 
   const sortedPlayers = filteredPlayers.sort((a, b) => {
@@ -62,6 +70,14 @@ const AvailablePlayersList = ({ players, onBuy }) => {
             <span className="favorite-star">★</span>
             <span className="role-name">Star</span>
           </button>
+          <button
+            onClick={toggleAvailability}
+            className={`role-filter favorite-filter ${showOnlyAvailable ? 'active' : ''}`}
+          >
+            <span className="favorite-star">❌</span>
+            <span className="role-name">Hide</span>
+          </button>
+
         </div>
         {sortedPlayers.map((player) => (
           <PlayerCard key={player.id} player={player} onBuy={onBuy} isCaptain={false} />

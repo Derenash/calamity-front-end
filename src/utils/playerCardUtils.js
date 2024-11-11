@@ -1,4 +1,10 @@
-// src/utils/flagUtils.js
+
+export function canPick(nationalityA, nationalityB) {
+  if (nationalityA === "BR" | nationalityB === "BR") {
+    return nationalityA === nationalityB
+  }
+  return true
+}
 
 export const getFlagImage = (countryCode) => {
   const flagUrl = `/flags/${countryCode.toLowerCase()}_flag.png`;
