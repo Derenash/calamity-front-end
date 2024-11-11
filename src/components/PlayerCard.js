@@ -8,7 +8,7 @@ const PlayerCard = ({ player, onBuy, isCaptain }) => {
   const isFavorite = favorites.includes(player.id);
   const isChill = localStorage.getItem('isChill') === 'true';
   const bothChill = isChill && player.isChill
-  const pickable = isCaptain || player.isLocked || bothChill || canPick(player.nationality, localStorage.getItem('nationality'));
+  const pickable = localStorage.getItem('observer') === 'true' || isCaptain || player.isLocked || bothChill || canPick(player.nationality, localStorage.getItem('nationality'));
 
   const availablePlayerCardClass = `available-player-card ${isFavorite ? 'favorite' : ''} ${pickable ? '' : 'unavailable'}`;
   const playerInfoClass = `player-info ${isCaptain ? 'captain' : ''}`;

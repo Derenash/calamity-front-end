@@ -95,7 +95,7 @@ const AuctionRoom = () => {
     setIsConfirming(true);
     try {
       const buyer = localStorage.getItem('username');
-      const team = teams.find(team => team.id === buyer);
+      const team = teams.find(team => team.id.toLowerCase() === buyer.toLowerCase());
       if (!team) {
         console.error('Team not found for buyer:', buyer);
         return;
