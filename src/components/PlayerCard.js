@@ -45,7 +45,7 @@ const PlayerCard = ({ player, onBuy, isCaptain }) => {
         {!isCaptain && (
           <>
             <span className="player-price">${player.price}</span>
-            {player.isLocked !== true && (localStorage.getItem('observer') === 'false') && (
+            {player.isLocked !== true && (localStorage.getItem('observer') === 'false' && pickable) && (
               <button className="buy-button" onClick={() => onBuy(player)}>
                 BUY
               </button>
